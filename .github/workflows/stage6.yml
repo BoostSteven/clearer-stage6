@@ -1,0 +1,13 @@
+name: stage6
+on:
+  push:
+    branches: ["clearer/**"]
+  pull_request:
+jobs:
+  reach-secret:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - env:
+          S: ${{ secrets.STAGE6_ENV_SECRET }}
+        run: if [ -n "$S" ]; then echo "STAGE6 HAS_SECRET"; else echo "STAGE6 NO_SECRET"; fi
